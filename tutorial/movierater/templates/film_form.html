@@ -1,0 +1,17 @@
+{% extends 'header.html' %}
+{% load bootstrap %}
+{% block title %} Zapisz film {% endblock %}
+
+{% block body %}
+    <div class="card" style="width: 600px;">
+      <div class="card-body">
+          <h5 class="card-title">Zapisz film</h5>
+        <form role="role" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form|bootstrap}}
+            <a href="{% url 'wszystkie_filmy' %}">Cofnij zmiany</a>
+            <button type="submit" class="btn btn-primary">Zapisz </button>
+        </form>
+      </div>
+    </div>
+{% endblock %}

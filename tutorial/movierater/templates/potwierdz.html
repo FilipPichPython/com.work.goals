@@ -1,0 +1,14 @@
+{% extends 'header.html' %}
+
+{% block title %} Potwierdz {% endblock %}
+
+{% block body %}
+    <div class="alert alert-danger" role="alert">
+        Czy na pewno chcesz usunac film {{film.name}} ???
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <a href="{% url 'wszystkie_filmy' %}">Cofnij zmiany</a>
+        <button type="submit" class="btn btn-danger">Tak </button>
+    </form>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'header.html' %}
+
+{% block title %} Lista filmow {% endblock %}
+
+{% block body %}
+    <div class="jumbotron">
+        <h1 class="display-4">
+            {% if user.is_authenticated %}
+            Witaj {{user.username}}<br>
+            <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+            <a class="btn btn-primary" href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </h1>
+        <hr class="my-4">
+        <p>Lista Filmow</p>
+    </div>
+
+
+    <a href="{% url 'nowy_film' %}">Nowy Film  <i class="fas fa-folder-plus"></i></a>
+        <br>
+            {% for film in filmy %}
+            <div class="card">
+                <div class="card_body">
+                    <img src="/media/{{film.photo}}">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <h2>{{film}}</h2>
+                            </div>
+                            <div class="col-sm-3">
+                                <a href="{'url edytuj_film:edytuj_film' film.id}"><i class="fas fa-edit"></i></a>
+                                <a href="{'url usun_film:usun_film' film.id}"><i class="fas fa-trash-alt"></i></a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p class="desc">{{film.description}}</p>
+                        </div>
+                </div>
+            </div>
+            {% endfor %}
+
+{% endblock %}
