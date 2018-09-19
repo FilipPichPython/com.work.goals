@@ -7,7 +7,7 @@ from rest_framework import viewsets
 from .serializers import UserSerializer, MovieSerializer
 
 
-class UserViewSet(viewsets.ModelViewSet):
+class UzytkownikSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -15,7 +15,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
 
 
-class MovieViewSet(viewsets.ModelViewSet):
+class FilmSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
     """
@@ -23,10 +23,10 @@ class MovieViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
 
 
-def wszystkie_filmy(request):
+def filmy_calosc(request):
     filmy = Movie.objects.all()
     return render(request,
-                  'lista_filmow.html', {'filmy': filmy})
+                  'lista_wszystkich_filmow.html', {'filmy': filmy})
 
 
 @login_required
@@ -36,9 +36,9 @@ def nowy_film(request):
 
     if form.is_valid():
         form.save()
-        return redirect(wszystkie_filmy)
+        return redirect(filmy_calosc)
 
-    return render(request, 'film_form.html', {'form': form})
+    return render(request, 'films.html', {'form': form})
 
 
 @login_required
@@ -49,9 +49,9 @@ def edytuj_film(request, id):
                      instance=film)
     if form.is_valid():
         form.save()
-        return redirect(wszystkie_filmy)
+        return redirect(filmy_calosc)
 
-    return render(request, 'film_form.html', {'form': form})
+    return render(request, 'films.html', {'form': form})
 
 
 @login_required
@@ -60,6 +60,6 @@ def usun_film(request, id):
 
     if request.method == 'POST':
         film.delete()
-        return redirect(wszystkie_filmy)
+        return redirect(filmy_calosc)
 
-    return render(request, 'potwierdz.html', {'film': film})
+    return render(request, 'agree.html', {'film': film})
