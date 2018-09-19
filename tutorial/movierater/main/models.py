@@ -22,8 +22,7 @@ class Movie(models.Model):
     imbd_rating = models.DecimalField(null=True, blank=True, decimal_places=7, max_digits=10)
     photo = models.ImageField(null=True, blank=True, upload_to='plakaty')
     info = models.OneToOneField(ExtraInfo,
-                                on_delete=models.CASCADE,
-                                primary_key=True,)
+                                on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name_with_year()
